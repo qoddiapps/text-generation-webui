@@ -16,7 +16,9 @@ RUN . /build/venv/bin/activate && \
 
 # https://developer.nvidia.com/cuda-gpus
 # for a rtx 2060: ARG TORCH_CUDA_ARCH_LIST="7.5"
-ARG TORCH_CUDA_ARCH_LIST="3.5;5.0;6.0;6.1;7.0;7.5;8.0;8.6+PTX"
+#ARG TORCH_CUDA_ARCH_LIST="3.5;5.0;6.0;6.1;7.0;7.5;8.0;8.6+PTX"
+ARG CUDA_VISIBLE_DEVICES=1,2
+ARG TORCH_CUDA_ARCH_LIST="7.5"
 ARG CLI_ARGS="--model llama-7b-4bit --wbits 4 --listen --auto-devices"
 RUN . /build/venv/bin/activate && \
     python3 setup_cuda.py bdist_wheel -d .
